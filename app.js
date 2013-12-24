@@ -35,8 +35,28 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
+// routes
 app.get('/', routes.index);
 
-http.createServer(app).listen(app.get('port'), function(){
+// user routes
+app.get( '/user', user.index );
+
+app.get( '/user/new', user.create );
+app.post('/user/new', user.doCreate );
+
+app.get( '/user/edit', user.edit );
+app.post('/user/edit', user.doEdit );
+
+app.get( '/user/delete', user.confirmDelete );
+app.post('/user/delete', user.doDelete );
+
+app.get( '/login', user.login );
+app.post('/login', user.doLogin );
+
+app.get( '/logout', user.logout );
+
+
+// go!
+http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
