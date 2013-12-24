@@ -26,3 +26,39 @@ process.on('SIGINT', function () {
         process.exit(0);
     });
 });
+
+
+/**
+ * USER schema
+ */
+var userSchema = new mongoose.Schema({
+    name: String,
+    email: { type: String, unique: true },
+    createdOn: { type: Date, default: Date.now },
+    modifiedOn: Date,
+    lastLogin: Date
+});
+
+/**
+ * USER model
+ */
+mongoose.model( 'User', userSchema );
+
+
+/**
+ * PROJECT schema
+ */
+var projectSchema = new mongoose.Schema({
+    projectName: String,
+    createdOn: { type: Date, default: Date.now },
+    modifiedOn: Date,
+    createdBy: String,
+    contributors: String,
+    tasks: String
+});
+
+/**
+ * PROJECT model
+ */
+mongoose.model( 'Project', projectSchema );
+
