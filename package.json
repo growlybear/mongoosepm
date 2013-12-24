@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "3.4.7",
-    "jade": "*"
+    "jade": "*",
+    "connect": "~2.12.0",
+    "mongoose": "~3.8.3"
   }
 }
