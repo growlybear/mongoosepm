@@ -25,4 +25,4 @@ process.on('SIGINT', function () {
         console.log('Mongoose disconnected due to application termination');
         process.exit(0);
     });
-}));
+});
