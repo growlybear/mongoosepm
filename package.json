@@ -1,0 +1,11 @@
+{
+  "name": "mongoosepm",
+  "version": "0.0.1",
+  "description": "Sample Project Management app from the Mongoose for Application Development book",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Allan <michaelallan@optushome.com.au>",
+  "license": "ISC"
+}
