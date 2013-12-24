@@ -35,6 +35,7 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
+
 // routes
 app.get('/', routes.index);
 
@@ -54,6 +55,21 @@ app.get( '/login', user.login );
 app.post('/login', user.doLogin );
 
 app.get( '/logout', user.logout );
+
+
+// project routes
+app.get( '/project', project.index );
+
+app.get( '/project/new', project.create );
+app.post('/project/new', project.doCreate );
+
+app.get( '/project/:id', project.displayInfo );
+
+app.get( '/project/edit/:id', project.edit );
+app.post('/project/edit/:id', project.doEdit );
+
+app.get( '/project/delete/:id', project.confirmDelete );
+app.post('/project/delete/:id', project.doDelete );
 
 
 // go!
