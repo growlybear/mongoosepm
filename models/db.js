@@ -20,7 +20,7 @@ mongoose.connection.on('disconnected', function () {
 });
 
 // handle unexpected process termination
-process.on('SIGINT', function (0 {
+process.on('SIGINT', function () {
     mongoose.connection.close(function () {
         console.log('Mongoose disconnected due to application termination');
         process.exit(0);
