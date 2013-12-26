@@ -18,7 +18,7 @@ exports.doCreate = function (req, res) {
 
     }, function (err, user) {
         if (err) {
-            console.error("Mike says: ", err);
+            console.error(err);
 
             if (err.code === 11000) {
                 res.redirect('/user/new?exists=true');
