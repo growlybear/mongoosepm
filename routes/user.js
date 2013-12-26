@@ -1,6 +1,21 @@
 var mongoose = require( 'mongoose' );
 var User = mongoose.model( 'User' );
 
+
+exports.index = function (req, res) {
+    if (req.session.loggedIn === true) {        // strict checking necessary?
+        res.render('user-page', {
+            title: req.session.user.name,
+            name: req.session.user.name,
+            email: req.session.user.email,
+            userId: req.session.user._id
+        });
+    }
+    else {
+        res.redirect('/login');
+    }
+};
+
 exports.create = function (req, res) {
     res.render('user-form', {
         title: 'Create user'
