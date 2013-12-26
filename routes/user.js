@@ -3,7 +3,6 @@ var User = mongoose.model( 'User' );
 
 exports.create = function (req, res) {
     res.render('user-form', {
-        title: 'Create user',
-        buttonText: 'Join!'
+        title: 'Create user'
     });
 };
