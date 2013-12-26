@@ -43,7 +43,7 @@ app.get('/', routes.index);
 // app.get( '/user', user.index );
 
 app.get( '/user/new', user.create );
-// app.post('/user/new', user.doCreate );
+app.post('/user/new', user.doCreate );
 
 // app.get( '/user/edit', user.edit );
 // app.post('/user/edit', user.doEdit );
