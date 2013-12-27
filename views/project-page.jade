@@ -1,0 +1,16 @@
+extends layout
+
+block content
+
+  h1 Mongoose Project Management
+  h2= name
+
+  p #{description}
+    h3 Actions
+      ul
+        li
+          a(href="/project/new") Create a new project
+        li
+          a(href="/project/edit/:id") Edit project info
+        li
+          a(href="/project/delete/:id") Delete #{name}
