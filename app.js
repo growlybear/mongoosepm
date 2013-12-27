@@ -45,31 +45,31 @@ app.get( '/user', user.index );
 app.get( '/user/new', user.create );
 app.post('/user/new', user.doCreate );
 
-// app.get( '/user/edit', user.edit );
-// app.post('/user/edit', user.doEdit );
+app.get( '/user/edit', user.edit );
+app.post('/user/edit', user.doEdit );
 
-// app.get( '/user/delete', user.confirmDelete );
-// app.post('/user/delete', user.doDelete );
+app.get( '/user/delete', user.confirmDelete );
+app.post('/user/delete', user.doDelete );
 
-// app.get( '/login', user.login );
-// app.post('/login', user.doLogin );
+app.get( '/login', user.login );
+app.post('/login', user.doLogin );
 
-// app.get( '/logout', user.logout );
+app.get( '/logout', user.logout );
 
 
-// // project routes
-// app.get( '/project', project.index );
+// project routes
+app.get( '/project', project.index );
 
-// app.get( '/project/new', project.create );
-// app.post('/project/new', project.doCreate );
+app.get( '/project/new', project.create );
+app.post('/project/new', project.doCreate );
 
-// app.get( '/project/:id', project.displayInfo );
+app.get( '/project/:id', project.displayInfo );
 
-// app.get( '/project/edit/:id', project.edit );
-// app.post('/project/edit/:id', project.doEdit );
+app.get( '/project/edit/:id', project.edit );
+app.post('/project/edit/:id', project.doEdit );
 
-// app.get( '/project/delete/:id', project.confirmDelete );
-// app.post('/project/delete/:id', project.doDelete );
+app.get( '/project/delete/:id', project.confirmDelete );
+app.post('/project/delete/:id', project.doDelete );
 
 
 // go!

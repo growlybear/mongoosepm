@@ -58,3 +58,31 @@ exports.doCreate = function (req, res) {
 
     });
 };
+
+exports.edit = function (req, res) {
+    res.redirect('/?TODO=implement');
+};
+
+exports.doEdit = function (req, res) {
+    res.redirect('/?TODO=implement');
+};
+
+exports.confirmDelete = function (req, res) {
+    res.redirect('/?TODO=implement');
+};
+
+exports.doDelete = function (req, res) {
+    res.redirect('/?TODO=implement');
+};
+
+exports.login = function (req, res) {
+    res.redirect('/?TODO=implement');
+};
+
+exports.doLogin = function (req, res) {
+    res.redirect('/?TODO=implement');
+};
+
+exports.logout = function (req, res) {
+    res.redirect('/?TODO=implement');
+};
