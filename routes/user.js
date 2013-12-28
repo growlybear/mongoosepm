@@ -3,7 +3,7 @@ var User = mongoose.model( 'User' );
 
 
 exports.index = function (req, res) {
-    if (req.session.loggedIn === true) {        // strict checking necessary?
+    if (req.session.loggedIn === 'true') {  // NOTE need strict check against String
         res.render('user-page', {
             title: req.session.user.name,
             name: req.session.user.name,
@@ -51,7 +51,7 @@ exports.doCreate = function (req, res) {
                 id: user._id
             };
 
-            req.session.loggedIn = true;
+            req.session.loggedIn = 'true';
 
             res.redirect('/user');
         }
@@ -76,11 +76,40 @@ exports.doDelete = function (req, res) {
 };
 
 exports.login = function (req, res) {
-    res.redirect('/?TODO=implement');
+    res.render('login-form', {
+        title: 'Login'
+    });
 };
 
 exports.doLogin = function (req, res) {
-    res.redirect('/?TODO=implement');
+    var email = req.body.email;
+
+    if (!email) res.redirect('/login?404=error');
+
+    User.findOne({
+
+        email: req.body.email
+
+    }, '_id name email',
+
+    function (err, user) {
+
+        if (err || !user) {
+            res.redirect('/login?404=error');
+        }
+
+        req.session.user = {
+            name: user.name,
+            email: user.email,
+            _id: user._id
+        };
+
+        console.log('Logged in user: ', user);
+
+        req.session.loggedIn = 'true';
+
+        res.redirect('/user');
+    });
 };
 
 exports.logout = function (req, res) {
