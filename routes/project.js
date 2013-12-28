@@ -55,6 +55,29 @@ exports.displayInfo = function (req, res) {
     res.redirect('/?TODO=implement');
 };
 
+exports.byUser = function (req, res) {
+    console.log('Fetching projects by user ...');
+
+    var userid = req.params.userid;
+
+    if (userid) {
+        Project.findByUserId(userid, function (err, projects) {
+            if (err) {
+                console.error(err);
+                res.json({ status: 'error', error: 'Error finding projects'});
+            }
+
+            console.log('Projects: ', projects);
+            res.json(projects);
+
+        });
+    }
+    else {
+        console.log('No user id supplied');
+        res.json({ status: 'error', error: 'No user id supplied'})
+    }
+};
+
 exports.edit = function (req, res) {
     res.redirect('/?TODO=implement');
 };
