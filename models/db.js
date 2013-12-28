@@ -58,6 +58,20 @@ var projectSchema = new mongoose.Schema({
 });
 
 /**
+ * PROJECT static methods
+ * NB. must be defined after the project schema is declared,
+ *     but before the model is instantiated
+ */
+projectSchema.statics.findByUserId = function (userid, callback) {
+    this.find(
+        { createdBy: userid },
+        '_id projectName',
+        { sort: 'modifiedOn' },
+        callback
+    );
+};
+
+/**
  * PROJECT model
  */
 mongoose.model( 'Project', projectSchema );
