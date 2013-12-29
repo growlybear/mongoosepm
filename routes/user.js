@@ -84,13 +84,17 @@ exports.login = function (req, res) {
 exports.doLogin = function (req, res) {
     var email = req.body.email;
 
+    // no validation other than checking to see user exists
     if (!email) res.redirect('/login?404=error');
 
     User.findOne({
 
         email: req.body.email
 
-    }, '_id name email',
+    },
+
+    // return only these fields from the database
+    '_id name email',
 
     function (err, user) {
 
