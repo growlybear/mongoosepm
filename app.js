@@ -64,7 +64,7 @@ app.get( '/project/new', project.create );
 app.post('/project/new', project.doCreate );
 
 app.get( '/project/:id', project.displayInfo );
-app.get( '/project/createdby/:userid', project.byUser );
+app.get( '/project/byuser/:userid', project.byUser );
 
 app.get( '/project/edit/:id', project.edit );
 app.post('/project/edit/:id', project.doEdit );

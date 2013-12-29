@@ -3,12 +3,16 @@ var Project = mongoose.model( 'Project' );
 
 
 exports.index = function (req, res) {
-    if (req.session.loggedIn === true) {        // strict checking necessary?
-        res.render('project-page', {
-            title: req.session.project.name,
-            name: req.session.user.name,
-            email: req.session.user.email,
-            userId: req.session.user._id
+    console.log('Don\'t think we should be in here');
+};
+
+exports.create = function (req, res) {
+    if (req.session.loggedIn === 'true') {
+        res.render('project-form', {
+            title: 'Create project',
+            userid: req.session.user._id,
+            userName: req.session.user.name,
+            buttonText: 'Make it so!'
         });
     }
     else {
@@ -16,43 +20,58 @@ exports.index = function (req, res) {
     }
 };
 
-exports.create = function (req, res) {
-    res.render('project-form', {
-        title: 'Create project'
-    });
-};
-
 exports.doCreate = function (req, res) {
     var now = Date.now();
 
     Project.create({
-        name: req.body.projectName,
-        description: req.body.description,
-        modifiedOn: now,
-        lastLogin: now
+        projectName: req.body.projectName,
+        createdBy: req.body.userid,
+        createdOn : Date.now(),
+        tasks : req.body.tasks
 
     }, function (err, project) {
         if (err) {
             console.error(err);
-
-            if (err.code === 11000) {
-                res.redirect('/project/new?exists=true');   // hmmm ?
-            }
-            else {
-                res.redirect('/?error=true');
-            }
+            res.redirect('/?error=project');
         }
         else {
             console.log("Project created and saved: ", project);
-
-            res.redirect('/project');
+            console.log("project._id = ", project._id);
+            res.redirect('/project/' + project._id);
         }
 
     });
 };
 
 exports.displayInfo = function (req, res) {
-    res.redirect('/?TODO=implement');
+    console.log(req.params.id);
+
+    var id = req.params.id;
+
+    if (req.session.loggedIn !== 'true') {
+        res.redirect('/login');
+    }
+    if (!id) {
+        res.redirect('/user');
+    }
+
+    Project.findById(id, function (err, project) {
+        if (err) {
+            console.log(err);
+            res.redirect('/user?404=project');
+        }
+        else {
+            console.log(project);
+
+            res.render('project-page', {
+                title: project.projectName,
+                projectName: project.projectName,
+                tasks: project.tasks,
+                createdBy: project.createdBy,
+                projectId: id
+            });
+        }
+    });
 };
 
 exports.byUser = function (req, res) {

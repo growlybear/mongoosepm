@@ -3,11 +3,14 @@ extends layout
 block content
   h1= title
   form(id="projectProfile", method="POST", action="")
+    p Project owner: #{userName}
+
+    input(type="hidden", name="userid", id="userid", value="#{userid}")
 
     label(for="projectName") Project name
     input(type="text", name="projectName", id="projectName")
-
+    br
     label(for="description") Description
     textarea(name="description", id="description")
-
+    br
     input(type="submit", value="Create project")
