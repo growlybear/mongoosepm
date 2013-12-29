@@ -18,7 +18,9 @@ exports.index = function (req, res) {
 
 exports.create = function (req, res) {
     res.render('user-form', {
-        title: 'Create user'
+        title: 'Create user',
+        name: '',
+        email: ''
     });
 };
 

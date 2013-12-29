@@ -5,9 +5,9 @@ block content
   form(id="userProfile", method="POST", action="")
 
     label(for="fullName") Full name
-    input(type="text", name="fullName", id="fullName")
+    input(type="text", name="fullName", id="fullName", value="#{name}")
 
     label(for="email") Email
-    input(type="email", name="email", id="email")
+    input(type="email", name="email", id="email", value="#{email}")
 
     input(type="submit", value="Join!")
