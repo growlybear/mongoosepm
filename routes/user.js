@@ -112,7 +112,14 @@ exports.doLogin = function (req, res) {
 
         req.session.loggedIn = 'true';
 
-        res.redirect('/user');
+        User.update(
+            { _id: user.id },
+            { $set: { lastLogin: Date.now() } },
+            function () {
+                res.redirect('/user');
+            }
+        );
+
     });
 };
 
