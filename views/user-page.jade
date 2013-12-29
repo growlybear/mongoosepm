@@ -7,15 +7,19 @@ block content
 
   p Email: #{email}
     h3 Actions
-      ul
-        li
-          a(href="/project/new") Create a new project
-        li
-          a(href="/user/edit") Edit user info
-        li
-          a(href="/user/delete") Delete #{name}
-        li
-          a(href="/logout") Logout #{name}
+    ul
+      li
+        a(href="/project/new") Create a new project
+      li
+        a(href="/user/edit") Edit user info
+      li
+        a(href="/user/delete") Delete #{name}
+      li
+        a(href="/logout") Logout #{name}
+
+  h3 My projects
+  ul#myprojects
+    li loading ...
 
 
 block mainjs
