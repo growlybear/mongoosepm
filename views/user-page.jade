@@ -16,3 +16,10 @@ block content
           a(href="/user/delete") Delete #{name}
         li
           a(href="/logout") Logout #{name}
+
+
+block mainjs
+
+  script.
+    var uid = "#{userId}"
+  script(src="/javascripts/user.js")
