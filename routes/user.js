@@ -50,7 +50,7 @@ exports.doCreate = function (req, res) {
             req.session.user = {
                 name: user.name,
                 email: user.email,
-                id: user._id
+                _id: user._id
             };
 
             req.session.loggedIn = 'true';
