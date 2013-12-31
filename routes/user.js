@@ -20,7 +20,8 @@ exports.create = function (req, res) {
     res.render('user-form', {
         title: 'Create user',
         name: '',
-        email: ''
+        email: '',
+        buttonText: 'Join!'
     });
 };
 
@@ -62,11 +63,46 @@ exports.doCreate = function (req, res) {
 };
 
 exports.edit = function (req, res) {
-    res.redirect('/?TODO=implement');
+    if (req.session.loggedIn !== 'true') {
+        res.redirect('/login');
+    }
+
+    res.render('user-form', {
+        title: 'Edit profile',
+        _id: req.session.user._id,
+        name: req.session.user.name,
+        email: req.session.user.email,
+        buttonText: 'Save'
+    });
 };
 
 exports.doEdit = function (req, res) {
-    res.redirect('/?TODO=implement');
+    var id = req.session.user._id;
+
+    if (id) {
+        User.findById(id, function (err, user) {
+            if (err) {
+                console.log('user.doEdit error: ', err);
+                res.redirect('/user?error=finding');
+            }
+
+            user.name = req.body.fullName;
+            user.email = req.body.email;
+            user.modifiedOn = Date.now();
+
+            user.save(function (err) {
+                if (err) {
+                    console.log('user.doEdit::user.save error: ', err);
+                }
+
+                console.log('User updated: ', req.body.fullName);
+                req.session.user.name = req.body.fullName;
+                req.session.user.email = req.body.email;
+
+                res.redirect('/user');
+            })
+        });
+    }
 };
 
 exports.confirmDelete = function (req, res) {
