@@ -166,8 +166,11 @@ exports.doLogin = function (req, res) {
 
     function (err, user) {
 
-        if (err || !user) {
-            res.redirect('/login?404=error');
+        if (err) {
+            return res.redirect('/login?404=error');
+        }
+        if (!user) {
+            return res.redirect('/login?404=usernotfound');
         }
 
         req.session.user = {
