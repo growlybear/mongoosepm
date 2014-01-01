@@ -1,4 +1,6 @@
+
 var mongoose = require('mongoose');
+var creationInfo = require('./creationInfo');
 
 // build the connection string
 var dbURI = 'mongodb://localhost/MongoosePM';
@@ -26,24 +28,6 @@ process.on('SIGINT', function () {
         process.exit(0);
     });
 });
-
-
-/**
- * Schema plugins
- */
-var creationInfo = function (schema, options) {
-
-    schema.add({ createdOn: {
-        type: Date,
-        default: Date.now
-    }});
-
-    schema.add({ createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    }});
-}
 
 
 
