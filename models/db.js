@@ -29,6 +29,25 @@ process.on('SIGINT', function () {
 
 
 /**
+ * Schema plugins
+ */
+var creationInfo = function (schema, options) {
+
+    schema.add({ createdOn: {
+        type: Date,
+        default: Date.now
+    }});
+
+    schema.add({ createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }});
+}
+
+
+
+/**
  * USER schema
  */
 var userSchema = new mongoose.Schema({
@@ -50,12 +69,12 @@ mongoose.model( 'User', userSchema );
  */
 var projectSchema = new mongoose.Schema({
     projectName: String,
-    createdOn: { type: Date, default: Date.now },
     modifiedOn: Date,
-    createdBy: String,
     contributors: String,
     tasks: String
 });
+
+projectSchema.plugin(creationInfo);
 
 /**
  * PROJECT static methods
