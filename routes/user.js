@@ -134,7 +134,6 @@ exports.doDelete = function (req, res) {
             }
 
             console.log('User deleted: ', user);
-            console.log('Mike session: ', req.session)
             clearSession(req.session, function () {
                 res.redirect('/');
             });
