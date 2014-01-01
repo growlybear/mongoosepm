@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  p.
+    #{name}, are you sure you want to permanently delete your account
+    with email address #{email}? This action cannot be undone.
+
+  form(id="deleteUser", method="POST", action="")
+    input(type="hidden", name="_id", id="_id", value="#{_id}")
+
+    input(type="submit", value="Yes, delete it!")

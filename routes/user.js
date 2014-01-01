@@ -2,6 +2,14 @@ var mongoose = require( 'mongoose' );
 var User = mongoose.model( 'User' );
 
 
+// utility functions
+function clearSession(session, callback) {
+    session.destroy();
+    callback();
+}
+
+
+// routes
 exports.index = function (req, res) {
     if (req.session.loggedIn === 'true') {  // NOTE need strict check against String
         res.render('user-page', {
@@ -106,11 +114,34 @@ exports.doEdit = function (req, res) {
 };
 
 exports.confirmDelete = function (req, res) {
-    res.redirect('/?TODO=implement');
+    res.render('user-delete-form', {
+        title: 'Delete account',
+        _id: req.session.user._id,
+        name: req.session.user.name,
+        email: req.session.user.email
+    });
 };
 
 exports.doDelete = function (req, res) {
-    res.redirect('/?TODO=implement');
+    var id = req.body._id;
+
+    if (id) {
+
+        User.findByIdAndRemove(id, function (err, user) {
+            if (err) {
+                console.log('user.doDelete - Error deleting user ', id);
+                return res.redirect('/user?error=deleting');
+            }
+
+            console.log('User deleted: ', user);
+            console.log('Mike session: ', req.session)
+            clearSession(req.session, function () {
+                res.redirect('/');
+            });
+        });
+
+        // TODO delete all projects created by this user
+    }
 };
 
 exports.login = function (req, res) {
