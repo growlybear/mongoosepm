@@ -11,8 +11,9 @@ block content
     input(type="hidden", name="userid", id="userid", value="#{userid}")
     input(type="hidden", name="projectId", id="projectId", value="#{projectId}")
 
+    - var projVal = projectName || '';
     label(for="projectName") Project name
-    input(type="text", name="projectName", id="projectName", value="#{projectName}")
+    input(type="text", name="projectName", id="projectName", value="#{projVal}")
 
     br
     label(for="tasks") Tasks
