@@ -1,16 +1,22 @@
 extends layout
 
 block content
+
   h1= title
+
   form(id="projectProfile", method="POST", action="")
+
     p Project owner: #{userName}
 
     input(type="hidden", name="userid", id="userid", value="#{userid}")
+    input(type="hidden", name="projectId", id="projectId", value="#{projectId}")
 
     label(for="projectName") Project name
-    input(type="text", name="projectName", id="projectName")
+    input(type="text", name="projectName", id="projectName", value="#{projectName}")
+
     br
-    label(for="description") Description
-    textarea(name="description", id="description")
+    label(for="tasks") Tasks
+    textarea(name="tasks", id="tasks") #{tasks}
+
     br
-    input(type="submit", value="Create project")
+    input(type="submit", value="#{buttonText}")

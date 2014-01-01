@@ -44,8 +44,6 @@ exports.doCreate = function (req, res) {
 };
 
 exports.displayInfo = function (req, res) {
-    console.log(req.params.id);
-
     var id = req.params.id;
 
     if (req.session.loggedIn !== 'true') {
@@ -98,11 +96,61 @@ exports.byUser = function (req, res) {
 };
 
 exports.edit = function (req, res) {
-    res.redirect('/?TODO=implement');
+    if (req.session.loggedIn !== 'true') {
+        res.redirect('/login');
+    }
+
+    var id = req.params.id;
+
+    if (!id) {
+        res.redirect('/user');
+    }
+
+    Project.findById(id, function (err, project) {
+        if (err) {
+            console.log('Problem finding project ', id);
+        }
+
+        res.render('project-form', {
+            title: 'Edit project',
+            userid: req.session.user._id,
+            userName: req.session.user.name,
+            projectId: req.params.id,
+            projectName: project.projectName,
+            tasks: project.tasks,
+            buttonText: 'Make the change!'
+        });
+    });
+
 };
 
 exports.doEdit = function (req, res) {
-    res.redirect('/?TODO=implement');
+    if (req.session.loggedIn !== 'true') {
+        res.redirect('/login');
+    }
+
+    var id = req.body.projectId;
+    if (!id) {
+        // TODO better error handling
+        console.log('project.doEdit error: no projectId ', id);
+        res.redirect('/user');
+    }
+
+    Project.findById(id, function (err, project) {
+        if (err) return err;
+
+
+        project.projectName = req.body.projectName;
+        project.tasks = req.body.tasks;
+        project.modifiedOn = Date.now();
+
+        project.save(function (err, project) {
+            if (err) return err;
+
+            console.log('Project updated: ', req.body.projectName);
+            res.redirect('/project/' + req.body.projectId);
+        });
+    });
 };
 
 exports.confirmDelete = function (req, res) {
